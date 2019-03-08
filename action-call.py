@@ -32,12 +32,12 @@ def subscribe_intent_callback(hermes, intentMessage):
 def action_wrapper(hermes, intentMessage, conf):
     if len(intentMessage.slots.call) > 0 and len(intentMessage.slots.person) > 0:
     person = intentMessage.slots.person.first().value # We extract the value from the slot "person"
-    result_sentence = "What message should be sent to  : {}".format(str(person))  # The response that will be said out loud by the TTS engine.
+    result_sentence = "Do you want to make a call to  : {}".format(str(person))  # The response that will be said out loud by the TTS engine.
     elif len(intentMessage.slots.call) > 0 and len(intentMessage.slots.number) > 0:
     number = intentMessage.slots.number.first().value # We extract the value from the slot "number"
-    result_sentence = "What message should be sent to the number : {}".format(str(number))  # The response that will be said out loud by the TTS engine.
+    result_sentence = "Dialing the number : {}".format(str(number))  # The response that will be said out loud by the TTS engine.
     else:
-    result_sentence = "I did not understand that name or number" 
+    result_sentence = "I did not understand that! Could you please repeat?" 
 
 current_session_id = intentMessage.session_id
 hermes.publish_end_session(current_session_id, result_sentence)
